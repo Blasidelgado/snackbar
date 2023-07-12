@@ -15,6 +15,7 @@
  * Soda: $2
 */
 
+
 #include <cs50.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -36,6 +37,10 @@ menu_item;
 // Array of menu items
 menu_item menu[NUM_ITEMS];
 
+// arrays containing products and prices to add into menu array
+string products[NUM_ITEMS] = {"Burguer", "Vegan Burguer", "Hot Dog", "Cheese Dog", "Fries", "Cheese Fries", "Cold Pressed Juice", "Cold Brew", "Water", "Soda"};
+float prices[NUM_ITEMS] = {9.5, 11, 5, 7, 5, 6, 7, 3, 2, 2};
+
 // Add items to menu
 void add_items(void);
 
@@ -51,7 +56,7 @@ int main(void)
 
     for (int i = 0; i < NUM_ITEMS; i++)
     {
-        printf("%s: $%.2f\n", menu[i].item, menu[i]. price);
+        printf("%s: $%.2f\n", menu[i].item, menu[i].price);
     }
     printf("\n");
 
@@ -74,11 +79,22 @@ int main(void)
 // Add at least the first four items to the menu array
 void add_items(void)
 {
-    return;
+    for (int i = 0; i < NUM_ITEMS; i++)
+    {
+        menu[i].item = products[i];
+        menu[i].price = prices[i];
+    }
 }
 
 // Search through the menu array to find an item's cost
 float get_cost(string item)
 {
+    for (int i = 0; i < NUM_ITEMS; i++)
+    {
+        if (strcasecmp(item, menu[i].item) == 0)
+        {
+            return menu[i].price;
+        }
+    }
     return 0.0;
 }
